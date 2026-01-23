@@ -117,6 +117,7 @@ source = { editable = "." }
 dependencies = [
     { name = "einops" },
     { name = "einx" },
+    { name = "heapq-max" },
     { name = "jaxtyping" },
     { name = "numpy" },
     { name = "psutil" },
@@ -135,6 +136,7 @@ dependencies = [
 requires-dist = [
     { name = "einops", specifier = ">=0.8.1" },
     { name = "einx", specifier = ">=0.3.0" },
+    { name = "heapq-max", specifier = ">=0.21" },
     { name = "jaxtyping", specifier = ">=0.3.0" },
     { name = "numpy" },
     { name = "psutil", specifier = ">=6.1.1" },
@@ -224,6 +226,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/9a/c8/dd58967d119baab74
 wheels = [
     { url = "https://files.pythonhosted.org/packages/01/61/d4b89fec821f72385526e1b9d9a3a0385dda4a72b206d28049e2c7cd39b8/gitpython-3.1.45-py3-none-any.whl", hash = "sha256:8908cb2e02fb3b93b7eb0f2827125cb699869470432cc885f019b8fd0fccff77", size = 208168, upload-time = "2025-07-24T03:45:52.517Z" },
 ]
+
+[[package]]
+name = "heapq-max"
+version = "0.21"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/59/fe/9bf1cb20552b7c0e1251f3315d3fce72567fd3217c7893b7a0ed6dc79b48/heapq_max-0.21.zip", hash = "sha256:e7576e0066ea40e337c3eb93810a09ac25b0560d129eee3c56b0743fd110ce06", size = 6953, upload-time = "2016-07-29T01:23:53.863Z" }
 
 [[package]]
 name = "idna"
