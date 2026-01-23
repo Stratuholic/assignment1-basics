@@ -73,14 +73,47 @@ def train_bpe(
     merges: list[tuple[bytes, bytes]] = []
     pair_freq: dict[tuple[bytes, bytes], int] = {}
 
-    for pretoken, freq in combined_pretoken_freq.items():
-        for i in range(len(pretoken) - 1):
-            pair = (pretoken[i], pretoken[i + 1])
-            if pair in pair_freq:
-                pair_freq[pair] += freq
-            else:
-                pair_freq[pair] = freq
+    # while len(vocab) < vocab_size:
+    #     for pretoken, freq in combined_pretoken_freq.items():
+    #         for i in range(len(pretoken) - 1):
+    #             pair = (pretoken[i], pretoken[i + 1])
+    #             if pair in pair_freq:
+    #                 pair_freq[pair] += freq
+    #             else:
+    #                 pair_freq[pair] = freq
+    #     best_pair = max(pair_freq, key=pair_freq.get)
+    #     a, b = best_pair
+    #     new_token = a + b
+    #     vocab[len(vocab)] = new_token
+    #     merges.append((a, b))
+    #     new_combined_pretoken_freq = {}
+    #     for pretoken, freq in combined_pretoken_freq.items():
+    #         new_pretoken = []
+    #         i = 0
+    #         n = len(pretoken)
+    #         while i < n:
+    #             if i < n - 1 and (pretoken[i], pretoken[i + 1]) == best_pair:
+    #                 new_pretoken.append(new_token)
+    #                 i += 2
+    #             else:
+    #                 new_pretoken.append(pretoken[i])
+    #                 i += 1
+    #         new_pretoken_tuple = tuple(new_pretoken)
+    #         if new_pretoken_tuple in new_combined_pretoken_freq:
+    #             new_combined_pretoken_freq[new_pretoken_tuple] += freq
+    #         else:
+    #             new_combined_pretoken_freq[new_pretoken_tuple] = freq
+    #     combined_pretoken_freq = new_combined_pretoken_freq
+    #     pair_freq.clear()
 
+    for pretoken, freq in combined_pretoken_freq.items():
+            for i in range(len(pretoken) - 1):
+                pair = (pretoken[i], pretoken[i + 1])
+                if pair in pair_freq:
+                    pair_freq[pair] += freq
+                else:
+                    pair_freq[pair] = freq
+    
     max_heap = [(freq, pair) for pair, freq in pair_freq.items()]
     heapq_max.heapify_max(max_heap)
 
@@ -95,7 +128,7 @@ def train_bpe(
         a, b = best_pair
         new_token = a + b
         vocab[len(vocab)] = new_token
-        merges.append([a, b])
+        merges.append((a, b))
 
         new_combined_pretoken_freq = {}
         for pretoken, freq in combined_pretoken_freq.items():
